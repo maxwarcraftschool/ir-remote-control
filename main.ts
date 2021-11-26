@@ -1,8 +1,19 @@
 let speedmeter = 0
+let afstand = 0
 irRemote.connectInfrared(DigitalPin.P11)
 let strip = neopixel.create(DigitalPin.P8, 4, NeoPixelMode.RGB)
 let val = 0
 let val2 = 0
+basic.forever(function () {
+    afstand = turtleBit.ultra()
+    if (turtleBit.ultra() > 11) {
+        turtleBit.Motor(LR.LeftSide, MD.Back, speedmeter)
+        turtleBit.Motor(LR.RightSide, MD.Back, speedmeter)
+    } else {
+        turtleBit.Motor(LR.LeftSide, MD.Forward, speedmeter)
+        turtleBit.Motor(LR.RightSide, MD.Forward, speedmeter)
+    }
+})
 basic.forever(function () {
     if (val2 == 82) {
         speedmeter = 0
